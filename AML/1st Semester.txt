@@ -1,0 +1,193 @@
+Git Commands
+
+
+git status
+git add .
+git commit -m "Delete the file"
+git push
+
+Hi all,
+
+Assignment 2 has been published on Github under an internal repo named P556-coursefile, folder hw2 (your repo should be in a similar structure as this example repo). You are assigned to a new team this time. If you added your former teammate as a collaborator in your Github repo during the past homework, please remove them asap. Failing to do so may result in a violation of academic integrity.
+
+All datasets are included in the folder. Most information can be found in the hw2.pdf file. Read through it carefully and be sure to follow every instruction. Please also read through all past announcements on piazza if you haven't done so because the homework pdf won't always cover everything.
+
+This assignment is due on Saturday, March 20, 2021, 11:59 p.m. Leave a comment below if you have any problems. Have fun and good luck!
+
+Best,
+
+Junyi
+
+
+
+Lavelle, Rowan | Wang, Xizi | Kumar,Abhinav 
+
+
+Spring 2021 CSCI-P556: Applied Machine Learning
+Homework # 2: Probability, Naive Bayes, and Linear Regression
+Due: Saturday, March 20, 2021, 11:59 p.m.
+Total Points: 100
+This assignment is designed to give you practical programming experience with probability,
+naive bayes, and linear regression. Please carefully read all instructions below and also
+periodically check Piazza for updates.
+You have been assigned a partner to work with on this homework assignment (see end of
+document). A spreadsheet with student contact information is on the Syllabus page of Canvas.
+Use this information to contact your partner and to establish your working relationship. Submit a
+post to Piazza (to Instructors) if you have any issues connecting or working with your partner.
+Each individual within the pairing should submit a solution to the assignment, to avoid mis-
+communication issues with your partner. Be sure to specify in the le, whose submission should
+be graded, as only one will be graded for the pairing. The submitted homework must include
+your names, as well as all resources that were used to solve the problem (e.g. web sites, books,
+research papers, other people, etc.). Academic honesty is taken seriously; for detailed information
+see Indiana University Code of Student Rights, Responsibilities, and Conduct.
+Your assignment must be submitted by committing your code to your IU Github
+repository before the deadline.
+
+
+Please create a folder called `hw2' (without quotes)
+ 
+and commit all les for this assignment to this folder. You are strongly encouraged to
+submit early and often to avoid any last minute issues and to conrm that you are committing
+your work correctly. The submission should be in the form of a Python 3 Jupyter Notebook le,
+along with any special instructions for running the program. 
+
+Be sure to run the le before
+committing, so that we can directly see your results. Programs that fail to run will not be
+graded and will result in a zero.
+
+
+Late submission policy: We expect all work to be nished and submitted on time. However,
+we do understand that there might be times when something unexpected comes up which delays
+you. Hence, as a late submission policy, we will allow late submissions up to 3 days late, each day
+carrying a 5 point penalty. If you submit 70 hours after the original deadline, the highest possible
+score for that assignment will be 85 points, out of 100. If the assignment is submited 1 minute after
+the deadline, then a 5 point penalty will be assessed. Late assignments submitted at 72:01 hours
+after the original deadline will not be accepted. Please, make the arrangements to start and nish
+your assignments early. This means you should push to Github well before the time stated on the
+homework. This means you must start the homework as soon as you can and continually commit.
+Question 1. [50 points]
+
+The CSV le, message.csv, contains labeled data, where each row contains the label (e.g. spam or
+not) and the corresponding text message. A value of 1 for the label indicates that the message is
+spam. This data has already been cleaned (e.g. removed punctuation and converted to lower case).
+For this problem, you will develop a Naive Bayes spam detector to classify whether the message
+is spam or not. Using stratied K-fold cross validation (K = 10) and an 80-20 split between training
+and testing data, you need to perform the following:
+
+
+
+1. From the training set, compute the total number of unique words in the set and 
+the countof each unique word in each message. 
+Hence, if there are N unique words and M messages
+in the training set, then the count of each unique word for all messages should result in a
+M  N matrix. 
+You may want to use DataFrame and dictionary objects to accomplish this.
+You may also use split() to ignore whitespace.
+
+ 
+
+2. Perform maximum likelihood estimation to determine the prior and class conditional 
+proba-bilities of the training set (e.g. compute P(y = 1); P(y = 0); P(xijy = 0); and P(xijy = 1)) ,
+where xi represents the i-th unique word. Be sure to conrm that these are indeed probabil-
+ities.
+
+
+3. Once the above probabilities are determined, 
+use Naive Bayes classication to classify eachof the testing examples as spam or not. 
+Ignore words from the testing set that are not contained in the training set. 
+Report the accuracy, precision, recall and specicity, alongwith the confusion matrix for each fold.
+Also report the average accuracy, precision, recall and specicity over all folds.
+
+4. Write a paragraph the summarizes the results and your thoughts about Naive Bayes classiication for this problem
+
+One problem with Naive Bayes classication is that the class conditional probabilities for each
+feature P(xijy) may be zero in many cases. This is a result of using limited data. One way to
+correct this is to \smooth" the values when computing the probabilities, where Laplace smoothing
+is one approach.
+Assuming z is a random variable that has G dierent possible outcomes, then the conditional
+probability of z given y can be calculated as below when using Laplace Smoothing:
+P(z = gjy = 0) =
+ng + 1
+n + G
+(1)
+ng is the total number of times z = g when y = 0, n is the total number of examples when y = 0.
+Repeat steps 2-4 from above, where Laplace Smoothing is used when calculating the class
+conditional probabilities for each word. Discuss how the results after Laplace Smoothing dier
+from the prior results.
+
+
+Extra work (Not part of grade): You can try to remove and subsequently ignore `stop
+words' from the list of unique words as well, before completing steps 2-4. Check out this link for
+why and how this can be done https:// www.geeksforgeeks.org/ removing-stop-words-nltk-python/
+
+
+Question 2. [50 points]
+A hospital staff member wants to determine if a patient's satisfaction with the 
+hospital (y) can
+be predicted from 
+the patient's age (x1, in years),
+severity of illness (x2),
+and anxiety level (x3).
+
+hospital	Age		severity of illness					anxiety level
+  48    	50    			51   							2.3
+  57    	36    			46   							2.3
+  66    	40    			48   							2.2
+  70    	41    			44   							1.8
+  89    	28    			43   							1.8
+  36    	49    			54   							2.9
+
+
+Forty-six patients were randomly selected, where the data is in the le patient satisfaction.txt with
+column 1 containing y-values, and columns 2-4 containing values for x1, x2 and x3, respectively.
+Large values indicate more satisfaction, illness severity, and anxiety. For this problem:
+
+1. Generate scatter plots between each of the features and label. 
+Also compute the correlation coecients between each feature-label pair. 
+What do the scatter plots and correlations convey about the dierent relationships?
+
+2. Divide this data into K=10 folds of training and testing sets. 
+Using your own implementations of batch, stochastic and mini-batch gradient descent, t a linear regression model using the training data. 
+Generate plots of the training loss for each iteration and implementation.
+Experiment with dierent values for the learning rate and mini-batch size. 
+Discuss how you selected the optimal values for the learning rate and mini-batch size. 
+Display the nal regression coecients for each implementation.
+3. Once trained, use the testing data and mean-square error to evaluate performance.
+Which approach performed best? Why?
+
+
+
+
+
+
+Spring 2021 CSCI-P556: Applied Machine Learning
+Lavelle, Rowan | Wang, Xizi | Kumar, Abhinav   
+Patlolla, Prateesh Reddy | Kolhatkar, Vighnesh Vivek
+Karri, Yaswanth | Chilla, Manaswini
+Kumari, Shilpa | Verma, Radheshyam
+Peters, Kyle | Iyer, Vijay
+Panampilly, Shwetha | Venkatanarayanan, Sathyan
+Mcshane, Brendan | Chai, Ruhui
+Benadikar, Vedant | Liu, Nick
+De Silva, Dinuka | McShane, Jack
+Thota, Venkatesh | Shamdasani, Rahul
+Vakharia, Milind | Solanky, Yash
+Sanghavi, Ayush | Jha, Richa
+Shahzad, Ahmed | Eyunni, Nrusimha Vihari
+Pardeshi, Swapnil | Mysore Mohan, Adithi
+Youngheun, Jo | Corum, Andrew
+Chalasani, Srinagh Dhanunjai | Majeske, Nicholas
+Singh, Shubham | Sawaji, Tanmay
+Vemula, Apurupa | Bhattacharya, Pratyush
+Nidadavolu, Sri Satya Sai Pavan | Desai, Vishwas
+Feng, Li | Faro, Nicholas
+Shah, Swet | Krishnamurthy, Monika
+Jawad, Maazin | Pawale, Ajinkya
+Chandran, Manisha | Li, Jiangqiong
+Shikha, Fnu | Chetia, Tanukrishna
+Gadag, Vinayaka Sharanappa | Deshpande, Chaitanya Shekhar
+Lin, Zilong | Gopalkrishna, Sumanth
+Dama, Ruchik Rohit | Behar, Ethan
+Single | Rebecca Myers
+Je Yoder | Montserrat Valdivia
+3/3

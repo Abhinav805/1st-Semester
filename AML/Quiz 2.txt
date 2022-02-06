@@ -1,0 +1,92 @@
+QUIZ 2 (Abhinav Kumar (abkuma@iu.edu)) 
+
+Question 1:
+Part 1 
+The classifier here is a straight line.
+The standard equation of the line 
+w1*x1 + w2*x2+ b = 0 
+
+Equation of line by the intercept formula :
+
+By using y = mx + c
+
+
+From the given figure we can find the equation of the line is  
+y = -5x/7 + 5
+-(5/7)*x -y + 5 = 0
+
+Here y = x2
+
+Now comparing with w1*x1 + w2*x2+ b = 0 
+Weight 1 is w1 = -5/7
+Weight 2 is w2 = -1
+Bias is b = 5
+
+
+Part 2
+Here in the figure given 
+True Positive : 11 that is the number of triangles above the line(Have the disease )
+True Negative : 8 that is the number of circles below the line(Does not have the disease)
+False Positive : 7 that is the number of circle above the line (Does not have disease actually but result showing having disease)
+False Negative : 4 that is number of triangles below the line (They have the disease but result showing that they does not have the disease)
+
+Accuracy = (True Positive + True Negative)/(True Positive + True Negative + False Positive + False Negative)
+
+Accuracy = (11 + 8 )/(11 + 8 + 7 + 4) = 19/ 30 = 0.6333
+So around 63 % is the accuracy.
+
+     True Class
+Predicted   	TP (11)      FP(7)
+Class		FN(4)	    TN(8) 	
+
+
+
+
+
+Question 2 :
+
+Part 1
+Only 1 neuron is required to classify the email is spam or ham.
+We have 2 classes only so any activation function which can give binary output and the typically the logistic activation function can be used.
+
+Part 2
+For MNIST dataset we will need 10 neurons since we will have to find data from 0 – 9 for the numbers  so we will take Softmax activation as it can easy handle multiple classes.
+
+Part 3
+For house price prediction problem, we need 1 neuron in the output layer. We used Linear Activation Function  since no additional modification is required.
+
+
+
+
+
+Question 3 :
+Part 1
+The shape of the input matrix is m * 10 or [m, 10]. Here m = training batch size and 10 is the input dimension
+Part 2
+
+W(h) = weight for hidden layer
+W(b) = weight for bias
+Equation of hidden layer Y(h)= X * W(h) + b(h)
+Y(h)[m,50] = X[m,10] * W(h)[10,50] + b(h)[m,50]
+So W(h) = 10 *50
+and b(h) = m* 50
+
+
+
+Part 3
+The equation of the output layer 
+Y(o) = Y(h)*W(o) + b(o) 
+Y(o)[m,3] = Y(h)[m,50] * W(o)[50,3] + b(o)[m,3]
+Weight W(o) = 50 * 3
+Bias = m * 3
+
+Part 4
+Shape of network’s output matrix Y = m* 3
+
+Part 5
+Y = ReLU(ReLU( X*W(h)  + b(h) * W(o) + b(o) ))
+
+
+
+
+
